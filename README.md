@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Pokémon Team Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Benvenuto nel **Pokémon Team Builder**, un'applicazione Web Progressiva (PWA) sviluppata in **React** con **TypeScript** e **Vite**, pensata per permettere agli allenatori di creare, gestire e condividere le proprie squadre Pokémon!
 
-Currently, two official plugins are available:
+Questo progetto è stato realizzato come progetto universitario.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Funzionalità Principali
 
-## React Compiler
+- **Creazione Team:** Costruisci la tua squadra scegliendo il gioco Pokémon desiderato e selezionando fino a 6 Pokémon (dati presi dinamicamente tramite *PokeAPI*).
+- **Gestione Utente:** Autenticazione tramite Email/Password o Google (Firebase Auth).
+- **I Miei Team:** Visualizza, modifica, elimina e pubblica le tue squadre salvate su Firebase Firestore.
+- **Community & Leaderboard:** Esplora i team pubblici creati da altri utenti, metti "Mi Piace" e commenta.
+- **PWA (Progressive Web App):** L'app è installabile, supporta il funzionamento offline ed è abilitata alla ricezione di notifiche desktop.
+- **UI Neo-Brutalista:** Un'interfaccia utente moderna, coerente e completamente responsiva.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tecnologie Utilizzate
 
-## Expanding the ESLint configuration
+- **Frontend:** React 19, TypeScript, Vite, React Router DOM
+- **Backend/BaaS:** Firebase (Auth, Firestore)
+- **PWA:** vite-plugin-pwa, Workbox
+- **Dati:** API REST esterne (PokeAPI)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 💻 Istruzioni per l'Avvio in Locale (Per il Docente)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Segui questi semplici passaggi per clonare, installare ed eseguire il progetto.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 1. Installazione ed Esecuzione Standard
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clona il repository
+git clone https://github.com/GiuseppeBufardeci/Pokemon-team-builder.git
+cd Pokemon-team-builder
+
+# Installa le dipendenze
+npm install
+
+# Avvia il server di sviluppo
+npm run dev
 ```
+*Il progetto sarà accessibile su `http://localhost:5173`.*
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Testare le funzionalità PWA (Offline & Installazione)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+I Service Worker per la gestione offline vengono registrati correttamente solo sulla build di produzione ottimizzata. Per testare l'esperienza PWA completa (Offline fallback, Banner di installazione e Notifiche) in locale:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Esegui la build del progetto
+npm run build
+
+# Avvia il server di anteprima della produzione
+npm run preview
 ```
