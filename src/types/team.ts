@@ -23,7 +23,7 @@ export interface TeamComment {
   id: string;
   userId: string;
   userName: string;
-  text: string;
+  text: string; 
   createdAt: string;
 }
 
