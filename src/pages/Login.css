@@ -1,0 +1,119 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: calc(100vh - 200px); /* Centra verticalmente calcolando l'altezza della navbar */
+}
+
+.login-card {
+  background: #fff;
+  border: 4px solid #111;
+  padding: 3rem 2.5rem;
+  box-shadow: 12px 12px 0 #111;
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.login-title {
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+  color: #111;
+  text-transform: uppercase;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-field label {
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.login-field input {
+  padding: 0.8rem;
+  border: 3px solid #111;
+  font-size: 1rem;
+  box-shadow: 4px 4px 0 #111;
+  transition: outline 0.2s ease, border-color 0.2s ease;
+}
+
+.login-field input:focus-visible {
+  outline: none;
+  border-color: #e63b10;
+}
+
+.login-btn {
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 3px solid #111;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #111;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.login-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #111;
+}
+
+.login-btn--primary {
+  background: #ffd700;
+  color: #111;
+  margin-top: 0.5rem;
+}
+
+.login-btn--secondary {
+  background: #f3f3f3;
+  color: #111;
+  font-size: 0.8rem;
+  padding: 0.6rem;
+}
+
+.login-btn--google {
+  background: #fff;
+  color: #111;
+}
+
+.login-divider {
+  width: 100%;
+  border: none;
+  border-top: 3px dashed #111;
+  margin: 0.5rem 0;
+}
+
+.login-error {
+  color: #e63b10;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  padding: 0.75rem;
+  border: 2px solid #e63b10;
+  background: #ffebe6;
+}
+
+.login-message {
+  text-align: center;
+  font-weight: bold;
+}

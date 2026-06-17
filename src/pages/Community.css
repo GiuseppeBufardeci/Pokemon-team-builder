@@ -1,0 +1,421 @@
+.community-wrapper {
+  max-width: 1000px; /* Evita che il contenuto si allarghi all'infinito */
+  max-width: 1100px; /* Allargata leggermente la griglia */
+  margin: 0 auto; /* Centra perfettamente la pagina */
+}
+
+.community-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.community-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.community-title-wrapper h2 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.community-title-underline {
+  height: 8px;
+  background-color: #e63b10;
+  width: 100%;
+  border: 2px solid #111;
+  box-shadow: 2px 2px 0 #111;
+}
+
+.community-controls {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  background: #fff;
+  padding: 1.5rem;
+  border: 3px solid #111;
+  box-shadow: 6px 6px 0 #111;
+  margin-bottom: 1rem;
+}
+
+.community-controls__action {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.community-controls__label {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.community-controls__buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.community-btn {
+  padding: 0.7rem 1rem;
+  border: 2px solid #111;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #111;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.community-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #111;
+}
+
+.community-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #111;
+}
+
+.community-btn--publish {
+  background: #e63b10;
+  color: #fff;
+}
+
+.community-btn--leaderboard {
+  background: #ffd700;
+  color: #111;
+}
+
+.community-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: auto;
+}
+
+.community-filter__label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.community-filter__select {
+  padding: 0.7rem 0.85rem;
+  border: 2px solid #111;
+  background: #fff;
+  color: #111;
+  font: inherit;
+  box-shadow: 4px 4px 0 #111;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  cursor: pointer;
+}
+
+.community-filter__select:hover,
+.community-filter__select:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #111;
+  outline: none;
+}
+
+.community-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 0.7rem;
+  border: 2px dashed #111;
+}
+
+.community-checkbox__input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.community-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 3px solid #111;
+  background: #f3f3f3;
+  box-shadow: 8px 8px 0 #111;
+  position: relative;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.community-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 #111;
+}
+
+.community-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px dashed #111;
+  padding-bottom: 0.75rem;
+}
+
+.community-card__header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.community-card__title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.community-card__game {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #111;
+  background: #fff;
+  color: #111;
+  box-shadow: 2px 2px 0 #111;
+}
+
+/* Colori specifici basati sullo slug del gioco */
+.community-card__game--red-blue { background: #e63b10; color: #fff; }
+.community-card__game--yellow { background: #ffd700; color: #111; }
+.community-card__game--gold-silver { background: #daa520; color: #fff; }
+.community-card__game--crystal { background: #4fd9ff; color: #111; }
+.community-card__game--ruby-sapphire { background: #a00000; color: #fff; }
+.community-card__game--emerald { background: #00a050; color: #fff; }
+.community-card__game--firered-leafgreen { background: #ff7327; color: #fff; }
+.community-card__game--diamond-pearl { background: #6890f0; color: #fff; }
+.community-card__game--platinum { background: #888888; color: #fff; }
+.community-card__game--heartgold-soulsilver { background: #b8860b; color: #fff; }
+.community-card__game--black-white { background: #444444; color: #fff; }
+.community-card__game--black-2-white-2 { background: #222222; color: #fff; }
+.community-card__game--x-y { background: #3333aa; color: #fff; }
+.community-card__game--omega-ruby-alpha-sapphire { background: #c03028; color: #fff; }
+.community-card__game--sun-moon { background: #f08030; color: #fff; }
+.community-card__game--ultra-sun-ultra-moon { background: #ff8c00; color: #fff; }
+.community-card__game--sword-shield { background: #3b4cca; color: #fff; }
+.community-card__game--scarlet-violet { background: #ff3333; color: #fff; }
+
+/* Fallback per giochi singoli e vecchi salvataggi */
+.community-card__game--red { background: #e63b10; color: #fff; }
+.community-card__game--blue { background: #3b4cca; color: #fff; }
+.community-card__game--green { background: #4caf50; color: #fff; }
+.community-card__game--gold { background: #daa520; color: #fff; }
+.community-card__game--silver { background: #c0c0c0; color: #111; }
+.community-card__game--ruby { background: #a00000; color: #fff; }
+.community-card__game--sapphire { background: #0000a0; color: #fff; }
+.community-card__game--diamond { background: #6890f0; color: #fff; }
+.community-card__game--pearl { background: #ffa5d2; color: #111; }
+.community-card__game--black { background: #444444; color: #fff; }
+.community-card__game--white { background: #e0e0e0; color: #111; }
+.community-card__game--x { background: #3333aa; color: #fff; }
+.community-card__game--y { background: #aa3333; color: #fff; }
+.community-card__game--sun { background: #f08030; color: #fff; }
+.community-card__game--moon { background: #8a2be2; color: #fff; }
+.community-card__game--sword { background: #3b4cca; color: #fff; }
+.community-card__game--shield { background: #c03028; color: #fff; }
+.community-card__game--scarlet { background: #ff3333; color: #fff; }
+.community-card__game--violet { background: #8a2be2; color: #fff; }
+
+.community-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
+}
+
+.community-card__author {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #e63b10;
+}
+
+.community-card__description {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.community-card__pokemons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.community-card__pokemon {
+  background: #d8d8d8;
+  border: 2px solid #111;
+  border-radius: 0; /* Più squadrati, rimuoviamo l'arrotondamento */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  box-shadow: 4px 4px 0 #111;
+  aspect-ratio: 1; /* Rende le card dei Pokemon perfettamente quadrate! */
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.community-card__pokemon:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #111;
+}
+
+.community-card__pokemon img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.community-card__actions {
+  margin-top: auto;
+  border-top: 2px dashed #111;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 1.1rem;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+
+.community-card__stats {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.community-card__stat {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: bold;
+}
+
+.community-card__icon {
+  transition: fill 0.2s;
+}
+
+.community-comments {
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 1rem;
+  cursor: default;
+}
+
+.community-comments__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.community-comments__item {
+  background: #fff;
+  padding: 0.5rem;
+  border: 2px solid #111;
+}
+
+.community-comments__delete-btn {
+  background: #e63b10;
+  color: #fff;
+  border: 2px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #111;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.community-comments__delete-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #111;
+}
+
+.community-comments__author {
+  display: block;
+  font-size: 0.85rem;
+  color: #e63b10;
+}
+
+.community-comments__text {
+  font-size: 0.9rem;
+}
+
+.community-comments__date {
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.community-comments__form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.community-comments__input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 2px solid #111;
+  min-width: 0;
+  font: inherit;
+}
+
+.community-comments__input:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+
+.community-comments__submit {
+  padding: 0.5rem 1rem;
+  border: 2px solid #111;
+  background: #e63b10;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.community-comments__submit:active {
+  transform: translate(2px, 2px);
+}
+
+/* Abbassiamo la soglia a 768px così sui portatili mantieni sempre 2 colonne */
+@media (max-width: 768px) {
+  .community-grid {
+    grid-template-columns: 1fr;
+  }
+}

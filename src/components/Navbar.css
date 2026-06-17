@@ -1,0 +1,135 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #e63b10;
+  border-bottom: 3px solid #111;
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar__inner {
+  width: 100%;
+  margin: 0;
+  padding: 0 0.5rem;
+  min-height: 72px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navbar__brand-link {
+  color: #fff7ef;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.navbar__link {
+  color: #2b140f;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.navbar__link:hover {
+  color: #fff7ef;
+}
+
+.navbar__link--active {
+  color: #fff7ef;
+  border-bottom-color: #fff7ef;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.navbar__user-email {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #fff7ef;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.navbar__logout {
+  border: 2px solid #111;
+  background: #111;
+  color: #fff7ef;
+  padding: 0.45rem 0.8rem;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #7f1d06;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease,
+    color 0.12s ease;
+}
+
+.navbar__logout:hover {
+  background: #2a2a2a;
+}
+
+.navbar__logout:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #7f1d06;
+}
+
+.navbar__logout:focus-visible,
+.navbar__link:focus-visible,
+.navbar__brand-link:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .navbar__inner {
+    grid-template-columns: 1fr;
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar__brand {
+    justify-content: center;
+  }
+
+  .navbar__nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .navbar__actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

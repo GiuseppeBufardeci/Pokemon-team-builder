@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;700&family=Press+Start+2P&display=swap');
+
+:root {
+    --bg-page: #d9d9df;
+    --panel-bg: #f2f2f2;
+    --border-strong: #111;
+    --shadow-sm: 3px 3px 0 #111;
+    --shadow-md: 6px 6px 0 #111;
+    --font-pixel: "Press Start 2P", monospace;
+    --font-ui: "Space Mono", monospace;
+    --font-body: "Inter", sans-serif;
+}
+
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-body);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Applichiamo il font pixelato a tutti i titoli per renderli coerenti con la Home */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-pixel);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* Applichiamo il font UI (squadrato/tecnico) a tutti i bottoni, input e testuali navigativi */
+button, input, select, textarea, .navbar__link, .navbar__brand-link {
+  font-family: var(--font-ui);
+}
+
+/* Ridimensionamento base per evitare che i font a 8-bit siano troppo ingombranti */
+h3 {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .create-team__controls,
+  .team-panel,
+  .create-team__field,
+  .create-team__input,
+  .create-team__select,
+  .pokemon-card,
+  .pokemon-card__media,
+  .pokemon-card__add,
+  .team-slot,
+  .team-slot__media,
+  .team-slot__remove,
+  .team-panel__save {
+    transition: none;
+    transform: none;
+  }
+
+  .create-team__input:hover,
+  .create-team__select:hover,
+  .create-team__input:focus-visible,
+  .create-team__select:focus-visible,
+  .pokemon-card:hover,
+  .pokemon-card:focus-within,
+  .pokemon-card__add:hover,
+  .pokemon-card__add:focus-visible,
+  .team-slot:hover,
+  .team-slot:focus-within,
+  .team-slot__remove:hover,
+  .team-slot__remove:focus-visible,
+  .team-panel__save:hover,
+  .team-panel__save:focus-visible {
+    transform: none;
+  }
+}
+
+/* src/index.css */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* --- NUOVI COLORI DI SFONDO --- */
+  background-color: #f4f0ea; /* Un elegante color panna/crema */
+  /* Motivo a pois (Dot Grid) per un look retrò! */
+  background-image: radial-gradient(#aaa 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: #111;
+}
+
+/* --- STILI GLOBALI PER I MODALI NEO-BRUTALISTI --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #fff;
+  border: 4px solid #111;
+  padding: 2rem;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 12px 12px 0 #111;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.modal-content input {
+  padding: 0.75rem;
+  border: 3px solid #111;
+  font-size: 1rem;
+  box-shadow: 4px 4px 0 #111;
+}
+
+.modal-content input:focus-visible {
+  outline: none;
+  border-color: #e63b10;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.modal-btn {
+  padding: 0.6rem 1.2rem;
+  border: 3px solid #111;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #111;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.modal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #111;
+}
+
+.modal-btn--cancel {
+  background: #f3f3f3;
+  color: #111;
+}
+
+.modal-btn--confirm {
+  background: #4caf50;
+  color: #fff;
+}
+
+.modal-btn--danger {
+  background: #e63b10;
+  color: #fff;
+}

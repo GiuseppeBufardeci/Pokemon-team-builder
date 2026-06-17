@@ -1,0 +1,240 @@
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.9rem;
+  border: 2px solid #111;
+  background: #f3f3f3;
+  box-shadow: 6px 6px 0 #111;
+}
+
+.pokemon-card__top {
+  display: flex;
+  flex-direction: column-reverse; /* Inverte l'ordine: immagine sopra, testo sotto */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.pokemon-card__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.pokemon-card__name {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pokemon-card__types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.pokemon-card__type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 0.2rem 0.5rem;
+  border: 2px solid #111;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #111;
+  box-shadow: 2px 2px 0 #111;
+}
+
+.pokemon-card__media {
+  flex-shrink: 0;
+  width: 100%;
+  height: 140px;
+  border: 2px solid #111;
+  background: #dcdcdc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 0 #111;
+}
+
+.pokemon-card__image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  transition: transform 0.2s ease;
+}
+
+.pokemon-card__top:hover .pokemon-card__image {
+  transform: scale(1.25);
+}
+
+.pokemon-card__add {
+  min-height: 44px;
+  border: 2px solid #111;
+  background: #e63b10;
+  color: #fff7ef;
+  font: inherit;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #111;
+}
+
+.pokemon-card__add:hover {
+  background: #c92f08;
+}
+
+.pokemon-card__add:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #111;
+}
+
+.pokemon-card {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.pokemon-card:hover,
+.pokemon-card:focus-within {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0 #111;
+}
+
+.pokemon-card__media {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.pokemon-card:hover .pokemon-card__media,
+.pokemon-card:focus-within .pokemon-card__media {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #111;
+}
+
+.pokemon-card__add {
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.pokemon-card__add:hover,
+.pokemon-card__add:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #111;
+}
+
+.pokemon-card__type-badge--normal {
+  background: #a8a77a;
+}
+
+.pokemon-card__type-badge--fire {
+  background: #ee8130;
+}
+
+.pokemon-card__type-badge--water {
+  background: #6390f0;
+  color: #fff;
+}
+
+.pokemon-card__type-badge--electric {
+  background: #f7d02c;
+}
+
+.pokemon-card__type-badge--grass {
+  background: #7ac74c;
+}
+
+.pokemon-card__type-badge--ice {
+  background: #96d9d6;
+}
+
+.pokemon-card__type-badge--fighting {
+  background: #c22e28;
+  color: #fff;
+}
+
+.pokemon-card__type-badge--poison {
+  background: #a33ea1;
+  color: #fff;
+}
+
+.pokemon-card__type-badge--ground {
+  background: #e2bf65;
+}
+
+.pokemon-card__type-badge--flying {
+  background: #a98ff3;
+}
+
+.pokemon-card__type-badge--psychic {
+  background: #f95587;
+  color: #fff;
+}
+
+.pokemon-card__type-badge--bug {
+  background: #a6b91a;
+}
+
+.pokemon-card__type-badge--rock {
+  background: #b6a136;
+}
+
+.pokemon-card__type-badge--ghost {
+  background: #735797;
+  color: #fff;
+}
+
+.pokemon-card__type-badge--dragon {
+  background: #6f35fc;
+  color: #fff;
+}
+
+.pokemon-card__type-badge--dark {
+  background: #705746;
+  color: #fff;
+}
+
+.pokemon-card__type-badge--steel {
+  background: #b7b7ce;
+}
+
+.pokemon-card__type-badge--fairy {
+  background: #d685ad;
+}
+
+.pokemon-card {
+  border: 3px solid #111;
+  box-shadow: 7px 7px 0 #111;
+}
+
+.pokemon-card:hover,
+.pokemon-card:focus-within {
+  box-shadow: 10px 10px 0 #111;
+}
+
+.pokemon-card__media {
+  border: 3px solid #111;
+}
+
+.pokemon-card__type-badge {
+  border: 3px solid #111;
+  box-shadow: 2px 2px 0 #111;
+}
+
+.pokemon-card__add {
+  border: 3px solid #111;
+  box-shadow: 5px 5px 0 #111;
+}
