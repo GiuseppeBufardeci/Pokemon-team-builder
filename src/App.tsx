@@ -10,6 +10,8 @@ import Leaderboard from './pages/Leaderboard'
 import PokemonDetail from './pages/PokemonDetail'
 import CreateTeam from './pages/CreateTeam'
 import Navbar from './components/Navbar'
+import { PwaManager } from './components/PwaManager'
+import { NotificationBox } from './components/NotificationBox'
 
 function App() {
   const {loading} = useAuth()
@@ -20,7 +22,8 @@ function App() {
 
   return (
     <div>
-
+      <PwaManager />
+      <NotificationBox />
       <Navbar />
 
       <main style={{ padding: '1rem' }}>

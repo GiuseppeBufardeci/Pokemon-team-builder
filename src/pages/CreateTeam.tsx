@@ -6,6 +6,7 @@ import { createTeam, checkTeamName, updateTeam } from "../services/teams"
 import type { Team, TeamPokemon, PokemonDetails } from "../types/team"
 import { PokemonCard } from "../components/PokemonCard"
 import { TeamSlot } from "../components/TeamSlot"
+import { addNotification } from "../services/notifications"
 import "./CreateTeam.css"
 
 function CreateTeam() {
@@ -88,6 +89,18 @@ function CreateTeam() {
                     game: game!,
                     pokemons: pokemonsPerIlDatabase
                 })
+            }
+
+            // Gestione notifica team incompleto
+            if (selectedPokemons.length < 6) {
+                if (Notification.permission === 'granted') {
+                    new Notification('Team Incompleto ⚠️', {
+                        body: `Hai salvato "${teamName}" con solo ${selectedPokemons.length} Pokémon. Ricordati di completarlo in futuro!`,
+                        icon: '/icon-192.png'
+                    });
+                }
+                // Aggiungiamo la notifica anche nel database per farla comparire nel box
+                await addNotification(user.uid, `Hai salvato il team "${teamName}" con solo ${selectedPokemons.length} Pokémon. Ricordati di completarlo in futuro!`);
             }
 
             navigate('/teams')

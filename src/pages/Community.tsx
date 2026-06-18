@@ -5,6 +5,7 @@ import { getAllPublicTeams, toggleLike, addComment, removeComment } from "../ser
 import { pokemonGames } from "../data/pokemonGames"
 import "./Community.css"
 import { useAuth } from "../context/AuthContext"
+import { addNotification } from "../services/notifications"
 
 
 function Community() {
@@ -60,6 +61,11 @@ const handleLike = async(team:Team)=>{
   try {
     // 2. Chiamata asincrona a Firebase
     await toggleLike(team.id, user.uid)
+    
+    // Se ho aggiunto un like (non rimosso) e il team non è mio, invio la notifica
+    if (!hasLiked && team.ownerId !== user.uid) {
+      await addNotification(team.ownerId, `${user.displayName || 'Un allenatore'} ha messo "Mi piace" al tuo team "${team.name}"!`);
+    }
   } catch (error) {
     console.error("Errore durante l'aggiornamento del like:", error)
   }
@@ -84,6 +90,11 @@ const handleComment = async(e:React.SyntheticEvent,team:Team) => {
 
     // Svuotiamo l'input text
     setCommentText("")
+    
+    // Invio la notifica al proprietario
+    if (team.ownerId !== user.uid) {
+      await addNotification(team.ownerId, `${user.displayName || 'Un allenatore'} ha commentato il tuo team "${team.name}".`);
+    }
   } catch (error) {
     console.error("Errore durante l'aggiunta del commento:", error)
   }
