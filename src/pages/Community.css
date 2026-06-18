@@ -377,7 +377,44 @@
 .community-comments__date {
   font-size: 0.7rem;
   color: #666;
+}
+
+.community-comments__date-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   margin-top: 0.25rem;
+}
+
+.community-comments__reply-btn {
+  background: none;
+  border: none;
+  color: #e63b10;
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+}
+
+.community-comments__reply-btn:hover {
+  text-decoration: underline;
+}
+
+.community-comments__replies {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-left: 2px solid #111;
+  padding-left: 1rem;
+}
+
+.community-comments__reply-item {
+  background: #f4f0ea;
+  padding: 0.5rem;
+  border: 2px solid #111;
 }
 
 .community-comments__form {
@@ -391,6 +428,25 @@
   border: 2px solid #111;
   min-width: 0;
   font: inherit;
+}
+
+.community-comments__reply-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #111;
+}
+
+.community-comments__cancel-btn {
+  padding: 0.5rem;
+  border: 2px solid #111;
+  background: #ccc;
+  color: #111;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .community-comments__input:focus-visible {

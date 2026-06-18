@@ -40,7 +40,7 @@ function Leaderboard() {
     const hasLiked = currentLikes.includes(user.uid)
     const newLikes = hasLiked ? currentLikes.filter(id => id !== user.uid) : [...currentLikes, user.uid]
     setTeams(prevTeams => prevTeams.map(t => t.id === team.id ? { ...t, likes: newLikes } : t))
-    try { await toggleLike(team.id, user.uid) } catch (error) { console.error("Errore during like:", error) }
+    try { toggleLike(team.id, user.uid).catch(err => console.error("Errore sincronizzazione like:", err)) } catch (error) { console.error("Errore during like:", error) }
   }
 
   // Limite massimo di team che possono apparire in classifica

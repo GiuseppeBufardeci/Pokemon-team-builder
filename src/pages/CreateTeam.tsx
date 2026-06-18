@@ -27,6 +27,7 @@ function CreateTeam() {
     )
     const [availablePokemons, setAvailablePokemons] = useState<PokemonDetails[]>([])
     const [loading, setLoading] = useState(true)
+    const [fetchError, setFetchError] = useState("")
     const [searchTerm, setSearchTerm] = useState("")
     const [typeFilter, setTypeFilter] = useState("")
     const [moveFilter, setMoveFilter] = useState("")
@@ -76,19 +77,19 @@ function CreateTeam() {
             })
 
             if (editTeam) {
-                await updateTeam(editTeam.id, {
+                updateTeam(editTeam.id, {
                     name: teamName,
                     game: game!,
                     pokemons: pokemonsPerIlDatabase
-                })
+                }).catch(err => console.error("Errore di sincronizzazione:", err))
             } else {
-                await createTeam({
+                createTeam({
                     name: teamName,
                     ownerId: user.uid,
                     authorName: user.displayName || "allenatore",
                     game: game!,
                     pokemons: pokemonsPerIlDatabase
-                })
+                }).catch(err => console.error("Errore di sincronizzazione:", err))
             }
 
             // Gestione notifica team incompleto
@@ -100,7 +101,8 @@ function CreateTeam() {
                     });
                 }
                 // Aggiungiamo la notifica anche nel database per farla comparire nel box
-                await addNotification(user.uid, `Hai salvato il team "${teamName}" con solo ${selectedPokemons.length} Pokémon. Ricordati di completarlo in futuro!`);
+                addNotification(user.uid, `Hai salvato il team "${teamName}" con solo ${selectedPokemons.length} Pokémon. Ricordati di completarlo in futuro!`)
+                    .catch(err => console.error("Errore notifica:", err));
             }
 
             navigate('/teams')
@@ -118,6 +120,8 @@ function CreateTeam() {
         const fetchPokemonsForGame = async () => {
             try {
                 setLoading(true); // Inizia il caricamento
+                setFetchError("");
+                setAvailablePokemons([]); // Svuota la lista vecchia per evitare glitch offline
             
                 // 1. Trova il versionGroup come hai già fatto
                 const gameData = pokemonGames.find((g) => g.slug === game);
@@ -194,6 +198,11 @@ function CreateTeam() {
             
                 } catch (error) {
                     console.error("Errore nel caricamento dei Pokémon:", error);
+                    if (!navigator.onLine) {
+                        setFetchError("Impossibile caricare i Pokémon. Sei offline e questo gioco non è ancora salvato nella cache locale.");
+                    } else {
+                        setFetchError("Impossibile caricare i Pokémon. Si è verificato un problema con la connessione ai server di PokeAPI.");
+                    }
                 } finally {
                     setLoading(false); // Fine del caricamento, in ogni caso
                 }
@@ -217,6 +226,13 @@ function CreateTeam() {
     if(!game) return <p>Gioco non valido</p>
 
     if(loading) return <p>loading...</p>
+    
+    if(fetchError) return (
+        <div style={{ padding: "2rem", textAlign: "center", fontWeight: "bold" }}>
+            <p>{fetchError}</p>
+            <button onClick={() => navigate('/')} style={{ marginTop: "1rem", padding: "0.5rem 1rem", cursor: "pointer", border: "2px solid #111", background: "#ffd700", fontWeight: "bold", boxShadow: "4px 4px 0 #111" }}>Torna alla Home</button>
+        </div>
+    )
 
     return (
         <section className="create-team">

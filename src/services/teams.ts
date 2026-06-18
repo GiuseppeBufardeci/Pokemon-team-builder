@@ -9,7 +9,8 @@ import {
     query,
     serverTimestamp,
     where,
-    getDoc
+    getDoc,
+    onSnapshot
 } from 'firebase/firestore'
 
 import {db} from '../lib/firebase'
@@ -129,6 +130,38 @@ export async function getAllPublicTeams(): Promise<Team[]>{
     })
 }
 
+// Funzione per iscriversi agli aggiornamenti in tempo reale dei team pubblici
+export function subscribeToPublicTeams(callback: (teams: Team[]) => void, onError?: (error: Error) => void) {
+    const q = query(
+        teamsCollection,
+        where('isPublic', '==', true),
+        orderBy('createdAt', 'desc')
+    )
+
+    return onSnapshot(q, (snapshot) => {
+        const teams = snapshot.docs.map((doc) => {
+            const data = doc.data()
+            return {
+                id: doc.id,
+                name: data.name,
+                ownerId: data.ownerId,
+                authorName: data.authorName,
+                game: data.game, // fallback per vecchi team senza gioco
+                pokemons: data.pokemons ?? [],
+                createdAt: data.createdAt?.toDate?.().toISOString?.() ?? '',
+                updatedAt: data.updatedAt?.toDate?.().toISOString?.() ?? '',
+                isPublic: data.isPublic ?? false,
+                description: data.description,
+                likes: data.likes ?? [],
+                comments: data.comments ?? [],
+            } as Team
+        })
+        callback(teams)
+    }, (error) => {
+        if (onError) onError(error)
+    })
+}
+
 export async function toggleLike(teamId:string,userId:string) {
     const teamRef= doc(db,'teams',teamId)
     const snapshot = await getDoc(teamRef)
@@ -150,7 +183,7 @@ export async function toggleLike(teamId:string,userId:string) {
     }
 }
 
-export async function addComment(teamId:string,userId:string,userName:string,text:string) {
+export async function addComment(teamId:string,userId:string,userName:string,text:string, replyToId?: string) {
     const teamRef = doc(db, 'teams',teamId)
     const snapshot = await getDoc(teamRef)
 
@@ -168,6 +201,10 @@ export async function addComment(teamId:string,userId:string,userName:string,tex
         createdAt: new Date().toISOString() // Formato standard leggibile e ordinabile
     }
 
+    if (replyToId) {
+        newComment.replyToId = replyToId
+    }
+
     await updateDoc(teamRef,{comments: [...currentComments,newComment]})
 
     return newComment
@@ -182,7 +219,8 @@ export async function removeComment(teamId: string, commentId: string) {
     }
 
     const currentComments: TeamComment[] = snapshot.data().comments || []
-    const updatedComments = currentComments.filter(c => c.id !== commentId)
+    // Rimuoviamo il commento e tutte le eventuali risposte collegate ad esso
+    const updatedComments = currentComments.filter(c => c.id !== commentId && c.replyToId !== commentId)
 
     await updateDoc(teamRef, { comments: updatedComments })
 }

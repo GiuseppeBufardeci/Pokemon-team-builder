@@ -22,6 +22,10 @@ function Teams() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [teamToDelete, setTeamToDelete] = useState<Team | null>(null)
 
+  // Stati per gestire il Modale di Annullamento Pubblicazione
+  const [isUnpublishModalOpen, setIsUnpublishModalOpen] = useState(false)
+  const [teamToUnpublish, setTeamToUnpublish] = useState<Team | null>(null)
+
   const { user } = useAuth()
   const navigate = useNavigate()
 
@@ -53,7 +57,7 @@ function Teams() {
   const confirmDelete = async () => {
     if (!teamToDelete) return;
     try {
-      await deleteTeam(teamToDelete.id);
+      deleteTeam(teamToDelete.id).catch(err => console.error("Errore sincronizzazione eliminazione:", err));
       setTeams((prevTeams) => prevTeams.filter((t) => t.id !== teamToDelete.id));
       setIsDeleteModalOpen(false);
       setTeamToDelete(null);
@@ -76,7 +80,7 @@ function Teams() {
     if (!teamToPublish || publishDescription.trim() === "") return
 
     try {
-      await publishTeam(teamToPublish.id, publishDescription)
+      publishTeam(teamToPublish.id, publishDescription).catch(err => console.error("Errore sincronizzazione pubblicazione:", err));
       setTeams(prev => prev.map(t => t.id === teamToPublish.id ? { ...t, isPublic: true, description: publishDescription } : t));
       setIsPublishModalOpen(false)
       setTeamToPublish(null)
@@ -86,17 +90,23 @@ function Teams() {
     }
   }
 
-  const handleUnpublish = async(team:Team) => {
-    const isConfirmed = window.confirm(`Sei sicuro di voler rendere privato il team ${team.name}?`);
-    if (isConfirmed) {
-      try {
-        await unpublishTeam(team.id);
-        // Aggiorniamo lo stato locale
-        setTeams(prev => prev.map(t => t.id === team.id ? { ...t, isPublic: false } : t));
-      } catch (err) {
-        console.error("Errore durante l'operazione:", err);
-        alert("Impossibile rendere privato il team.");
-      }
+  // Apre il modale per rendere privato il team
+  const openUnpublishModal = (team: Team) => {
+    setTeamToUnpublish(team)
+    setIsUnpublishModalOpen(true)
+  }
+
+  // Esegue l'azione dopo la conferma nel modale
+  const confirmUnpublish = async () => {
+    if (!teamToUnpublish) return;
+    try {
+      unpublishTeam(teamToUnpublish.id).catch(err => console.error("Errore sincronizzazione ritiro:", err));
+      setTeams(prev => prev.map(t => t.id === teamToUnpublish.id ? { ...t, isPublic: false } : t));
+      setIsUnpublishModalOpen(false);
+      setTeamToUnpublish(null);
+    } catch (err) {
+      console.error("Errore durante l'operazione:", err);
+      alert("Impossibile rendere privato il team.");
     }
   }
 
@@ -184,7 +194,7 @@ function Teams() {
                 ) : (
                   <button 
                     className="team-card__btn team-card__unpublish-btn"
-                    onClick={() => handleUnpublish(team)} 
+                    onClick={() => openUnpublishModal(team)} 
                     title="Rendi Privato"
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
@@ -228,6 +238,20 @@ function Teams() {
             <div className="modal-actions">
               <button type="button" className="modal-btn modal-btn--cancel" onClick={() => setIsDeleteModalOpen(false)}>Annulla</button>
               <button type="button" className="modal-btn modal-btn--danger" onClick={confirmDelete}>Elimina</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODALE DI ANNULLAMENTO PUBBLICAZIONE NEO-BRUTALISTA */}
+      {isUnpublishModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Rendi Privato</h3>
+            <p>Sei sicuro di voler rendere privato il team <strong>{teamToUnpublish?.name}</strong>?<br/>Non sarà più visibile nella Community.</p>
+            <div className="modal-actions">
+              <button type="button" className="modal-btn modal-btn--cancel" onClick={() => setIsUnpublishModalOpen(false)}>Annulla</button>
+              <button type="button" className="modal-btn modal-btn--danger" onClick={confirmUnpublish}>Conferma</button>
             </div>
           </div>
         </div>

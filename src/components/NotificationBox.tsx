@@ -24,7 +24,12 @@ export function NotificationBox() {
   useEffect(() => {
     if (!user) return;
 
-    const q = query(collection(db, 'notifications'), where('userId', '==', user.uid));
+    // Diciamo a Firebase di mandarci SOLO le notifiche dell'utente loggato E non lette
+    const q = query(
+      collection(db, 'notifications'),
+      where('userId', '==', user.uid),
+      where('read', '==', false)
+    );
     
     const unsubscribe = onSnapshot(q, (snapshot) => {
       // Estraiamo e ordiniamo per data (le più recenti in alto)
@@ -34,8 +39,8 @@ export function NotificationBox() {
         
       setNotifications(notifs);
 
-      // Contiamo quelle non lette
-      const unreadCount = notifs.filter(n => !n.read).length;
+      // Ora Firebase ci manda SOLO quelle non lette, quindi la lunghezza è il conto esatto!
+      const unreadCount = notifs.length;
 
       // Se ci sono notifiche non lette E non abbiamo ancora mostrato il riepilogo
       if (unreadCount > 0 && !hasShownSummary.current && Notification.permission === 'granted') {
@@ -52,8 +57,7 @@ export function NotificationBox() {
 
   if (!user) return null;
 
-  const unreadNotifications = notifications.filter(n => !n.read);
-  const unreadCount = unreadNotifications.length;
+  const unreadCount = notifications.length;
 
   return (
     <div className="notification-widget">
@@ -71,10 +75,10 @@ export function NotificationBox() {
             <button className="notification-box__close-btn" onClick={() => setIsOpen(false)}>✖</button>
           </div>
           <div className="notification-box__list">
-            {unreadNotifications.length === 0 ? (
+            {notifications.length === 0 ? (
               <p className="notification-empty">Nessuna notifica.</p>
             ) : (
-              unreadNotifications.map(notif => (
+              notifications.map(notif => (
                 <div key={notif.id} className="notification-item unread">
                   <p>{notif.message}</p>
                   <button onClick={() => markAsRead(notif.id)} className="notification-read-btn">

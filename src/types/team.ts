@@ -25,6 +25,7 @@ export interface TeamComment {
   userName: string;
   text: string; 
   createdAt: string;
+  replyToId?: string;
 }
 
 export interface Team {

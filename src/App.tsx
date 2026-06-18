@@ -12,6 +12,7 @@ import CreateTeam from './pages/CreateTeam'
 import Navbar from './components/Navbar'
 import { PwaManager } from './components/PwaManager'
 import { NotificationBox } from './components/NotificationBox'
+import { OfflineBanner } from './components/OfflineBanner'
 
 function App() {
   const {loading} = useAuth()
@@ -23,6 +24,7 @@ function App() {
   return (
     <div>
       <PwaManager />
+      <OfflineBanner />
       <NotificationBox />
       <Navbar />
 
