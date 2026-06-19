@@ -1,7 +1,10 @@
 .community-wrapper {
-  max-width: 1000px; /* Evita che il contenuto si allarghi all'infinito */
-  max-width: 1100px; /* Allargata leggermente la griglia */
-  margin: 0 auto; /* Centra perfettamente la pagina */
+  max-width: 1000px;
+  /* Evita che il contenuto si allarghi all'infinito */
+  max-width: 1100px;
+  /* Allargata leggermente la griglia */
+  margin: 0 auto;
+  /* Centra perfettamente la pagina */
 }
 
 .community-page {
@@ -144,9 +147,8 @@
 
 .community-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2.5rem;
-  align-items: start;
 }
 
 .community-card {
@@ -159,6 +161,10 @@
   box-shadow: 8px 8px 0 #111;
   position: relative;
   transition: transform 160ms ease, box-shadow 160ms ease;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  min-width: 0;
+  height: 100%;
 }
 
 .community-card:hover {
@@ -201,45 +207,191 @@
 }
 
 /* Colori specifici basati sullo slug del gioco */
-.community-card__game--red-blue { background: #e63b10; color: #fff; }
-.community-card__game--yellow { background: #ffd700; color: #111; }
-.community-card__game--gold-silver { background: #daa520; color: #fff; }
-.community-card__game--crystal { background: #4fd9ff; color: #111; }
-.community-card__game--ruby-sapphire { background: #a00000; color: #fff; }
-.community-card__game--emerald { background: #00a050; color: #fff; }
-.community-card__game--firered-leafgreen { background: #ff7327; color: #fff; }
-.community-card__game--diamond-pearl { background: #6890f0; color: #fff; }
-.community-card__game--platinum { background: #888888; color: #fff; }
-.community-card__game--heartgold-soulsilver { background: #b8860b; color: #fff; }
-.community-card__game--black-white { background: #444444; color: #fff; }
-.community-card__game--black-2-white-2 { background: #222222; color: #fff; }
-.community-card__game--x-y { background: #3333aa; color: #fff; }
-.community-card__game--omega-ruby-alpha-sapphire { background: #c03028; color: #fff; }
-.community-card__game--sun-moon { background: #f08030; color: #fff; }
-.community-card__game--ultra-sun-ultra-moon { background: #ff8c00; color: #fff; }
-.community-card__game--sword-shield { background: #3b4cca; color: #fff; }
-.community-card__game--scarlet-violet { background: #ff3333; color: #fff; }
+.community-card__game--red-blue {
+  background: #e63b10;
+  color: #fff;
+}
+
+.community-card__game--yellow {
+  background: #ffd700;
+  color: #111;
+}
+
+.community-card__game--gold-silver {
+  background: #daa520;
+  color: #fff;
+}
+
+.community-card__game--crystal {
+  background: #4fd9ff;
+  color: #111;
+}
+
+.community-card__game--ruby-sapphire {
+  background: #a00000;
+  color: #fff;
+}
+
+.community-card__game--emerald {
+  background: #00a050;
+  color: #fff;
+}
+
+.community-card__game--firered-leafgreen {
+  background: #ff7327;
+  color: #fff;
+}
+
+.community-card__game--diamond-pearl {
+  background: #6890f0;
+  color: #fff;
+}
+
+.community-card__game--platinum {
+  background: #888888;
+  color: #fff;
+}
+
+.community-card__game--heartgold-soulsilver {
+  background: #b8860b;
+  color: #fff;
+}
+
+.community-card__game--black-white {
+  background: #444444;
+  color: #fff;
+}
+
+.community-card__game--black-2-white-2 {
+  background: #222222;
+  color: #fff;
+}
+
+.community-card__game--x-y {
+  background: #3333aa;
+  color: #fff;
+}
+
+.community-card__game--omega-ruby-alpha-sapphire {
+  background: #c03028;
+  color: #fff;
+}
+
+.community-card__game--sun-moon {
+  background: #f08030;
+  color: #fff;
+}
+
+.community-card__game--ultra-sun-ultra-moon {
+  background: #ff8c00;
+  color: #fff;
+}
+
+.community-card__game--sword-shield {
+  background: #3b4cca;
+  color: #fff;
+}
+
+.community-card__game--scarlet-violet {
+  background: #ff3333;
+  color: #fff;
+}
 
 /* Fallback per giochi singoli e vecchi salvataggi */
-.community-card__game--red { background: #e63b10; color: #fff; }
-.community-card__game--blue { background: #3b4cca; color: #fff; }
-.community-card__game--green { background: #4caf50; color: #fff; }
-.community-card__game--gold { background: #daa520; color: #fff; }
-.community-card__game--silver { background: #c0c0c0; color: #111; }
-.community-card__game--ruby { background: #a00000; color: #fff; }
-.community-card__game--sapphire { background: #0000a0; color: #fff; }
-.community-card__game--diamond { background: #6890f0; color: #fff; }
-.community-card__game--pearl { background: #ffa5d2; color: #111; }
-.community-card__game--black { background: #444444; color: #fff; }
-.community-card__game--white { background: #e0e0e0; color: #111; }
-.community-card__game--x { background: #3333aa; color: #fff; }
-.community-card__game--y { background: #aa3333; color: #fff; }
-.community-card__game--sun { background: #f08030; color: #fff; }
-.community-card__game--moon { background: #8a2be2; color: #fff; }
-.community-card__game--sword { background: #3b4cca; color: #fff; }
-.community-card__game--shield { background: #c03028; color: #fff; }
-.community-card__game--scarlet { background: #ff3333; color: #fff; }
-.community-card__game--violet { background: #8a2be2; color: #fff; }
+.community-card__game--red {
+  background: #e63b10;
+  color: #fff;
+}
+
+.community-card__game--blue {
+  background: #3b4cca;
+  color: #fff;
+}
+
+.community-card__game--green {
+  background: #4caf50;
+  color: #fff;
+}
+
+.community-card__game--gold {
+  background: #daa520;
+  color: #fff;
+}
+
+.community-card__game--silver {
+  background: #c0c0c0;
+  color: #111;
+}
+
+.community-card__game--ruby {
+  background: #a00000;
+  color: #fff;
+}
+
+.community-card__game--sapphire {
+  background: #0000a0;
+  color: #fff;
+}
+
+.community-card__game--diamond {
+  background: #6890f0;
+  color: #fff;
+}
+
+.community-card__game--pearl {
+  background: #ffa5d2;
+  color: #111;
+}
+
+.community-card__game--black {
+  background: #444444;
+  color: #fff;
+}
+
+.community-card__game--white {
+  background: #e0e0e0;
+  color: #111;
+}
+
+.community-card__game--x {
+  background: #3333aa;
+  color: #fff;
+}
+
+.community-card__game--y {
+  background: #aa3333;
+  color: #fff;
+}
+
+.community-card__game--sun {
+  background: #f08030;
+  color: #fff;
+}
+
+.community-card__game--moon {
+  background: #8a2be2;
+  color: #fff;
+}
+
+.community-card__game--sword {
+  background: #3b4cca;
+  color: #fff;
+}
+
+.community-card__game--shield {
+  background: #c03028;
+  color: #fff;
+}
+
+.community-card__game--scarlet {
+  background: #ff3333;
+  color: #fff;
+}
+
+.community-card__game--violet {
+  background: #8a2be2;
+  color: #fff;
+}
 
 .community-card__meta {
   display: flex;
@@ -257,6 +409,8 @@
 .community-card__description {
   font-size: 0.9rem;
   margin: 0;
+  max-height: 65px;
+  overflow-y: auto;
 }
 
 .community-card__pokemons {
@@ -271,13 +425,15 @@
 .community-card__pokemon {
   background: #d8d8d8;
   border: 2px solid #111;
-  border-radius: 0; /* Più squadrati, rimuoviamo l'arrotondamento */
+  border-radius: 0;
+  /* Più squadrati, rimuoviamo l'arrotondamento */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
   box-shadow: 4px 4px 0 #111;
-  aspect-ratio: 1; /* Rende le card dei Pokemon perfettamente quadrate! */
+  aspect-ratio: 1;
+  /* Rende le card dei Pokemon perfettamente quadrate! */
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 

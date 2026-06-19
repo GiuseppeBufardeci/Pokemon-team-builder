@@ -22,8 +22,12 @@ function Leaderboard() {
         setLoading(true)
         const publicTeams = await getAllPublicTeams()
         setTeams(publicTeams)
-      } catch (e: any) {
-        setError(e.message)
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+          setError(e.message)
+        } else {
+          setError(String(e))
+        }
       } finally {
         setLoading(false)
       }
@@ -47,7 +51,7 @@ function Leaderboard() {
   const MAX_LEADERBOARD_TEAMS = 50;
 
   // Filtro
-  let displayTeams = teams.filter((t) => gameFilter === "" || t.game === gameFilter)
+  const displayTeams = teams.filter((t) => gameFilter === "" || t.game === gameFilter)
 
   // Ordina per numero di like in ordine decrescente
   displayTeams.sort((a, b) => (b.likes?.length || 0) - (a.likes?.length || 0))
@@ -91,13 +95,13 @@ function Leaderboard() {
                 #{index + 1}
               </div>
 
-              <header className="team-card__header" style={{ paddingLeft: '2rem' }}>
+              <header className="team-card__header">
                 <h3>{team.name}</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'flex-end' }}>
                   <span className="team-card__date" style={{ color: '#e63b10' }}>By {team.authorName}</span>
                 </div>
               </header>
-              {team.description && <p style={{ fontSize: '0.9rem', margin: '0 0 0 2rem' }}>{team.description}</p>}
+              {team.description && <p className="team-card__description">{team.description}</p>}
               
               {/* Visualizzazione orizzontale dei Pokemon! */}
               <ul className="team-card__pokemons" style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}>

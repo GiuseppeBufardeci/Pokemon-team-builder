@@ -26,7 +26,6 @@ const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 const [commentToDelete, setCommentToDelete] = useState<{ team: Team, commentId: string } | null>(null)
 
 useEffect(()=>{
-  setLoading(true)
   const unsubscribe = subscribeToPublicTeams(
     (publicTeams) => {
       setTeams(publicTeams)

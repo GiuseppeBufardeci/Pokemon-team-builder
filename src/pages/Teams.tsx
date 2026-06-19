@@ -38,8 +38,8 @@ function Teams() {
         setError('')
         const data = await getTeamsByOwner(user.uid)
         setTeams(data)
-      }catch(error:any){
-        setError(error.message)
+      }catch(error:unknown){
+        if (error instanceof Error) setError(error.message)
       }finally{
         setLoading(false)
       }
@@ -160,7 +160,7 @@ function Teams() {
                 <h3>{team.name}</h3>
                 <span className="team-card__date">{new Date(team.createdAt).toLocaleDateString()}</span>
               </header>
-              {team.description && <p style={{ fontSize: '0.9rem', margin: '0' }}>{team.description}</p>}
+              {team.description && <p className="team-card__description">{team.description}</p>}
               <ul className="team-card__pokemons">
                 {team.pokemons.map((pokemon, index) => (
                   <li key={index} className="team-card__pokemon" title={pokemon.name}>

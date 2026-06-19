@@ -42,6 +42,10 @@
   background: #f3f3f3;
   box-shadow: 8px 8px 0 #111;
   transition: transform 160ms ease, box-shadow 160ms ease;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  min-width: 0;
+  height: 100%;
 }
 
 .team-card:hover {
@@ -91,6 +95,13 @@
   font-size: 0.9rem;
   font-weight: bold;
   color: #555;
+}
+
+.team-card__description {
+  font-size: 0.9rem;
+  margin: 0;
+  max-height: 65px;
+  overflow-y: auto;
 }
 
 .team-card__pokemons {

@@ -16,6 +16,10 @@
   box-shadow: 10px 10px 0 #111;
   position: relative;
   transition: transform 160ms ease, box-shadow 160ms ease;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  min-width: 0;
+  height: 100%;
 }
 
 .leaderboard-card:hover {
@@ -41,4 +45,11 @@
 .load-more-btn:hover {
   transform: translate(-2px, -2px);
   box-shadow: 8px 8px 0 #e63b10;
+}
+
+.team-card__description {
+  font-size: 0.9rem;
+  margin: 0;
+  max-height: 85px;
+  overflow-y: auto;
 }

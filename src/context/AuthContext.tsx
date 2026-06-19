@@ -1,15 +1,16 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { onAuthStateChanged, type User } from 'firebase/auth'
 import { auth } from '../lib/firebase'
-import { loginWithEmail, registerWithEmail, logout as logoutService , loginWithGoogle as loginWithGoogleService} from '../services/auth.service'
+import { loginWithEmail, registerWithEmail, logout as logoutService, loginWithGoogle as loginWithGoogleService } from '../services/auth.service'
 
 type AuthContextType = {
   user: User | null
   loading: boolean
   login: (email: string, password: string) => Promise<void>
-  register: (email: string, password: string,nickname: string) => Promise<void>
+  register: (email: string, password: string, nickname: string) => Promise<void>
   logout: () => Promise<void>
-  loginWithGoogle:() => Promise<void>
+  loginWithGoogle: () => Promise<void>
 }
 
 type AuthProviderProps = {
@@ -35,13 +36,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await loginWithEmail(email, password)
   }
 
-  const loginWithGoogle = async()=>{
+  const loginWithGoogle = async () => {
     await loginWithGoogleService()
   }
 
-  const register = async (email: string, password: string, nickname:string) => {
-    await registerWithEmail(email, password,nickname)
-    
+  const register = async (email: string, password: string, nickname: string) => {
+    await registerWithEmail(email, password, nickname)
+
     // L'aggiornamento del profilo in Firebase non fa scattare onAuthStateChanged in automatico.
     // Forziamo l'aggiornamento dello stato in React clonando l'oggetto utente con i nuovi dati!
     if (auth.currentUser) {
@@ -54,7 +55,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (                                                                      //capire meglio il provider
-    <AuthContext.Provider value={{ user, loading, login, register, logout, loginWithGoogle }}>  
+    <AuthContext.Provider value={{ user, loading, login, register, logout, loginWithGoogle }}>
       {children}
     </AuthContext.Provider>
   )

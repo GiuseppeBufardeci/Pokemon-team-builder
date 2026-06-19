@@ -157,7 +157,7 @@ function CreateTeam() {
 
                  // Eseguiamo una fetch per ogni singolo pokemon usando Promise.all per estrarre Tipi e Statistiche
                 const detailedPokemons = await Promise.all(
-                    entries.map(async (entry: any) => {
+                    entries.map(async (entry: { pokemon_species: { url: string, name: string } }) => {
                         const urlParts = entry.pokemon_species.url.split('/').filter(Boolean);
                         const pokemonId = parseInt(urlParts[urlParts.length - 1], 10);
                         
@@ -170,16 +170,16 @@ function CreateTeam() {
                                 id: pokemonId,
                                 name: entry.pokemon_species.name,
                                 sprite: data.sprites?.front_default || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`,
-                                types: data.types.map((t: any) => t.type.name),
-                                abilities: data.abilities.map((a: any) => a.ability.name),
-                                moves: data.moves.map((m: any) => m.move.name),
+                                types: data.types.map((t: { type: { name: string } }) => t.type.name),
+                                abilities: data.abilities.map((a: { ability: { name: string } }) => a.ability.name),
+                                moves: data.moves.map((m: { move: { name: string } }) => m.move.name),
                                 stats: {
-                                    hp: data.stats.find((s: any) => s.stat.name === 'hp')?.base_stat || 0,
-                                    atk: data.stats.find((s: any) => s.stat.name === 'attack')?.base_stat || 0,
-                                    def: data.stats.find((s: any) => s.stat.name === 'defense')?.base_stat || 0,
+                                    hp: data.stats.find((s: { stat: { name: string }, base_stat: number }) => s.stat.name === 'hp')?.base_stat || 0,
+                                    atk: data.stats.find((s: { stat: { name: string }, base_stat: number }) => s.stat.name === 'attack')?.base_stat || 0,
+                                    def: data.stats.find((s: { stat: { name: string }, base_stat: number }) => s.stat.name === 'defense')?.base_stat || 0,
                                 }
                             };
-                        } catch (e) {
+                        } catch {
                             // Se la chiamata singola fallisce, ritorniamo un pokemon di "fallback" senza stats e tipi
                             return {
                                 id: pokemonId,

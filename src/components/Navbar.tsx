@@ -8,8 +8,8 @@ export default function Navbar() {
     const handleLogout = async () => {
         try {
         await logout();
-        } catch (error: any) {
-        console.error(error.message);
+        } catch (error: unknown) {
+        if (error instanceof Error) console.error(error.message);
         }
     }
 

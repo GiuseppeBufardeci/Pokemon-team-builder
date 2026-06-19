@@ -34,8 +34,8 @@ function Login() {
     try {
       setMessage('')
       await register(email,password,nickname)
-    } catch (error: any) {
-      setMessage(error.message)
+    } catch (error: unknown) {
+      if (error instanceof Error) setMessage(error.message)
     }
   }
 
@@ -43,8 +43,8 @@ function Login() {
     try{
       setMessage("")
       await loginWithGoogle()
-    }catch(error:any){
-      setMessage(error.message)
+    }catch(error:unknown){
+      if (error instanceof Error) setMessage(error.message)
     }
   }
 
@@ -52,8 +52,8 @@ function Login() {
     try {
       setMessage('')
       await login(email,password)
-    } catch (error: any) {
-      setMessage(error.message)
+    } catch (error: unknown) {
+      if (error instanceof Error) setMessage(error.message)
     }
   }
 
@@ -65,7 +65,7 @@ function Login() {
         {user ? (
           <p className="login-message">Utente già autenticato</p>
         ) : (
-          <form className="login-form" onSubmit={(e) => { e.preventDefault(); isRegistering ? handleRegister() : handleLogin()  }}>
+          <form className="login-form" onSubmit={(e) => { e.preventDefault(); if (isRegistering) handleRegister(); else handleLogin(); }}>
             
             <div className="login-field">
               <label>Email</label>

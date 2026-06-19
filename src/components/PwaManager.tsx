@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// @ts-ignore (evita errori se TypeScript non trova subito i tipi del plugin virtuale)
+// @ts-expect-error (evita errori se TypeScript non trova subito i tipi del plugin virtuale)
 import { registerSW } from 'virtual:pwa-register'
 
 export function PwaManager() {
