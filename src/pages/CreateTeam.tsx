@@ -242,7 +242,7 @@ function CreateTeam() {
                 <div className="create-team__controls-top">
                     <div className="create-team__field create-team__field--game">
                     <label htmlFor="gameSelect" className="create-team__label">
-                        Select game
+                        Seleziona gioco
                     </label>
                     <select
                         id="gameSelect"
@@ -268,13 +268,13 @@ function CreateTeam() {
 
                     <div className="create-team__field create-team__field--search">
                     <label htmlFor="pokemonSearch" className="create-team__label">
-                        Search Pokémon
+                        Cerca Pokémon
                     </label>
                     <input
                         id="pokemonSearch"
                         className="create-team__input"
                         type="text"
-                        placeholder="Search Pokémon..."
+                        placeholder="Cerca Pokémon..."
                         value={searchTerm}
                         onChange={(e) => {
                         setSearchTerm(e.target.value);
@@ -286,7 +286,7 @@ function CreateTeam() {
                 <div className="create-team__filters">
                     <div className="create-team__field">
                     <label htmlFor="typeFilter" className="create-team__label">
-                        Type
+                        Tipo
                     </label>
                     <select
                         id="typeFilter"
@@ -335,14 +335,14 @@ function CreateTeam() {
                 <section className="team-panel">
                 <div className="team-panel__header">
                     <h2 className="team-panel__title">
-                    Your team ({selectedPokemons.length}/6)
+                    La tua squadra ({selectedPokemons.length}/6)
                     </h2>
                 </div>
 
                 <form className="team-panel__form" onSubmit={handleSaveTeam}>
                     <div className="team-panel__field">
                     <label htmlFor="teamName" className="create-team__label">
-                        Team name
+                        Nome del team
                     </label>
                     <input
                         id="teamName"

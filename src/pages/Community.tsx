@@ -5,7 +5,7 @@ import { subscribeToPublicTeams, toggleLike, addComment, removeComment } from ".
 import { pokemonGames } from "../data/pokemonGames"
 import "./Community.css"
 import { useAuth } from "../context/AuthContext"
-import { addNotification } from "../services/notifications"
+import { addNotification, setUniqueNotification, removeNotification } from "../services/notifications"
 
 
 function Community() {
@@ -56,9 +56,15 @@ const handleLike = async(team:Team)=>{
     // onSnapshot intercetterà la modifica e aggiornerà l'interfaccia istantaneamente.
     toggleLike(team.id, user.uid).catch(err => console.error("Errore sincronizzazione like:", err))
     
-    // Se ho aggiunto un like (non rimosso) e il team non è mio, invio la notifica
-    if (!hasLiked && team.ownerId !== user.uid) {
-      addNotification(team.ownerId, `${user.displayName || 'Un allenatore'} ha messo "Mi piace" al tuo team "${team.name}"!`).catch(err => console.error(err));
+    if (team.ownerId !== user.uid) {
+      const notificationId = `${team.id}_${user.uid}_like`;
+      if (!hasLiked) {
+        // Se ho aggiunto un like (non rimosso), creo/aggiorno la notifica univoca
+        setUniqueNotification(notificationId, team.ownerId, `${user.displayName || 'Un allenatore'} ha messo "Mi piace" al tuo team "${team.name}"!`).catch(err => console.error(err));
+      } else {
+        // Se ho rimosso il like, elimino la notifica per non spammare l'autore
+        removeNotification(notificationId).catch(err => console.error(err));
+      }
     }
   } catch (error) {
     console.error("Errore durante l'aggiornamento del like:", error)
@@ -209,7 +215,7 @@ displayTeams.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.created
                   </span>
                 </div>
                 <div className="community-card__meta">
-                  <span className="community-card__author">By {team.authorName}</span>
+                  <span className="community-card__author">Di {team.authorName}</span>
                 </div>
               </header>
               {team.description && <p className="community-card__description">{team.description}</p>}

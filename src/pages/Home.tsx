@@ -15,7 +15,7 @@ function Home() {
   return (
       <section className="home">
         <header className="home__hero">
-          <p className="home__eyebrow">Main series team builder</p>
+          <p className="home__eyebrow">Team Builder Serie Principale</p>
           <h1 className="home__title">SCEGLI IL GIOCO</h1>
           <p className="home__subtitle">
             Crea il tuo team Pokémon scegliendo una versione della serie principale.

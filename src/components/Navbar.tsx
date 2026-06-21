@@ -7,9 +7,9 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         try {
-        await logout();
+            await logout();
         } catch (error: unknown) {
-        if (error instanceof Error) console.error(error.message);
+            if (error instanceof Error) console.error(error.message);
         }
     }
 
@@ -27,15 +27,15 @@ export default function Navbar() {
                         to="/"
                         end
                         className={({ isActive }) =>
-                        isActive ? "navbar__link navbar__link--active" : "navbar__link"
+                            isActive ? "navbar__link navbar__link--active" : "navbar__link"
                         }
                     >
-                        Build
+                        Home
                     </NavLink>
                     <NavLink
                         to="/community"
                         className={({ isActive }) =>
-                        isActive ? "navbar__link navbar__link--active" : "navbar__link"
+                            isActive ? "navbar__link navbar__link--active" : "navbar__link"
                         }
                     >
                         Community
@@ -43,34 +43,34 @@ export default function Navbar() {
                     <NavLink
                         to="/teams"
                         className={({ isActive }) =>
-                        isActive ? "navbar__link navbar__link--active" : "navbar__link"
+                            isActive ? "navbar__link navbar__link--active" : "navbar__link"
                         }
                     >
-                        My Teams
+                        I Miei Team
                     </NavLink>
                 </nav>
 
                 <div className="navbar__actions">
-                {!user ? (
-                    <NavLink to="/login" className="navbar__link navbar__link--action">
-                    Login
-                    </NavLink>
-                ) : (
-                    <>
-                    <span className="navbar__user-email">
-                        {user.displayName ?? "allenatore"}
-                    </span>
-                    <button
-                        type="button"
-                        className="navbar__logout"
-                        onClick={handleLogout}
-                    >
-                        Logout
-                    </button>
-                    </>
-                )}
+                    {!user ? (
+                        <NavLink to="/login" className="navbar__link navbar__link--action">
+                            Login
+                        </NavLink>
+                    ) : (
+                        <>
+                            <span className="navbar__user-email">
+                                {user.displayName ?? "allenatore"}
+                            </span>
+                            <button
+                                type="button"
+                                className="navbar__logout"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </header>
-  )
+    )
 }

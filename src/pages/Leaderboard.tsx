@@ -4,6 +4,7 @@ import type { Team } from "../types/team"
 import { getAllPublicTeams, toggleLike } from "../services/teams"
 import { pokemonGames } from "../data/pokemonGames"
 import { useAuth } from "../context/AuthContext"
+import { setUniqueNotification, removeNotification } from "../services/notifications"
 import "./Teams.css"
 import "./Leaderboard.css"
 
@@ -44,7 +45,20 @@ function Leaderboard() {
     const hasLiked = currentLikes.includes(user.uid)
     const newLikes = hasLiked ? currentLikes.filter(id => id !== user.uid) : [...currentLikes, user.uid]
     setTeams(prevTeams => prevTeams.map(t => t.id === team.id ? { ...t, likes: newLikes } : t))
-    try { toggleLike(team.id, user.uid).catch(err => console.error("Errore sincronizzazione like:", err)) } catch (error) { console.error("Errore during like:", error) }
+    try { 
+      toggleLike(team.id, user.uid).catch(err => console.error("Errore sincronizzazione like:", err)) 
+      
+      if (team.ownerId !== user.uid) {
+        const notificationId = `${team.id}_${user.uid}_like`;
+        if (!hasLiked) {
+          setUniqueNotification(notificationId, team.ownerId, `${user.displayName || 'Un allenatore'} ha messo "Mi piace" al tuo team "${team.name}"!`).catch(err => console.error(err));
+        } else {
+          removeNotification(notificationId).catch(err => console.error(err));
+        }
+      }
+    } catch (error) { 
+      console.error("Errore during like:", error) 
+    }
   }
 
   // Limite massimo di team che possono apparire in classifica
@@ -98,7 +112,7 @@ function Leaderboard() {
               <header className="team-card__header">
                 <h3>{team.name}</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'flex-end' }}>
-                  <span className="team-card__date" style={{ color: '#e63b10' }}>By {team.authorName}</span>
+                  <span className="team-card__date" style={{ color: '#e63b10' }}>Di {team.authorName}</span>
                 </div>
               </header>
               {team.description && <p className="team-card__description">{team.description}</p>}
