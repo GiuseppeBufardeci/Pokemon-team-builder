@@ -5,16 +5,17 @@ import "./PokemonCard.css"
 interface PokemonCardProps {
   pokemon: PokemonDetails;
   onAdd: (pokemon: PokemonDetails) => void;
+  onView?: (pokemon: PokemonDetails) => void;
 }
 
-export function PokemonCard({ pokemon, onAdd }: PokemonCardProps) {
+export function PokemonCard({ pokemon, onAdd, onView }: PokemonCardProps) {
   const navigate = useNavigate();
 
   return (
     <li className="pokemon-card">
       <div 
         className="pokemon-card__top" 
-        onClick={() => navigate(`/pokemon/${pokemon.name}`)}
+        onClick={() => onView ? onView(pokemon) : navigate(`/pokemon/${pokemon.name}`)}
         style={{ cursor: "pointer" }}
       >
         <div className="pokemon-card__meta">

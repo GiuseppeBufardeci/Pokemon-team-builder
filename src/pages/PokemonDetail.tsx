@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import './PokemonDetail.css'
 
 // Un'interfaccia veloce per i dati grezzi che ci arrivano da PokeAPI
@@ -24,8 +24,18 @@ interface PokeApiDetail {
 function PokemonDetail() {
   const { name } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
   const [pokemon, setPokemon] = useState<PokeApiDetail | null>(null)
   const [loading, setLoading] = useState(true)
+
+  const handleBack = () => {
+    const s = location.state as { game?: string } | null;
+    if (s?.game) {
+       navigate(`/teams/new/${s.game}`, { state: s });
+    } else {
+       navigate(-1);
+    }
+  }
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -52,7 +62,7 @@ function PokemonDetail() {
 
   return (
     <div className="pokedex-container">
-      <button className="pokedex-back-btn" onClick={() => navigate(-1)}>
+      <button className="pokedex-back-btn" onClick={handleBack}>
         &larr; Torna indietro
       </button>
 
